@@ -31,4 +31,10 @@ class HelpdeskController extends Controller
 
         return back()->with('error', 'Something went wrong');
     }
+
+    public function dashboardPage()
+    {
+        $departments = Department::all();
+        return view('dashboard', compact('departments'));
+    }
 }

@@ -20,10 +20,9 @@ Route::middleware('web')->group(function () {
 
     Route::post('/signup', [UserController::class, 'storeData'])->name('signupUser');
 
-    Route::get('/dashboard', function(){
-        return view('dashboard');
-    })->middleware('auth')
-      ->name('dashboard');
+    Route::get('/dashboard', [HelpdeskController::class, 'dashboardPage'])
+        ->middleware('auth')
+        ->name('dashboard');
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
