@@ -26,15 +26,13 @@
     <h2 class="my-2">Supported Tasks</h2>
         <ol type="i">
             @foreach($departments as $department)
-                @if( Auth::user()->user_id == $department->user_id)
                 <li class="border border-black">
                     <strong>Application Department: {{ $department->application_department }}</strong>
                     <p>Request task: {{ $department->supported_task }}</p>
-                    <p>Task Status: {{ $department->task_status }}</p>
+                    <p>Task Status: <strong class="bg-blue-600 text-white">{{ $department->task_status }}</strong></p>
                 </li>
-                @endif
             @endforeach
         </ol>
-        </section>
+    </section>
 </body>
 </html>

@@ -9,19 +9,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id');
+        $table->id('application_id'); // it is primary key
 
-            $table->foreign('user_id')
-                ->references('user_id')
-                ->on('students')
-                ->onDelete('cascade');
+        $table->unsignedBigInteger('user_id'); 
 
-            $table->id('application_id');
-            $table->string('application_department');
-            $table->string('supported_task');
-            $table->string('task_status');
-            $table->timestamps();
-        });
+        $table->foreign('user_id') // the user_id is defined as foreign key which comes from student table
+            ->references('user_id')
+            ->on('students')
+            ->cascadeOnDelete();
+
+        $table->string('application_department');
+        $table->string('supported_task');
+        $table->string('task_status');
+        $table->timestamps();
+    });
     }
 
     public function down(): void

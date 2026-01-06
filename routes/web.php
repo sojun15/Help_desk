@@ -24,6 +24,13 @@ Route::middleware('web')->group(function () {
         ->middleware('auth')
         ->name('dashboard');
 
+    Route::get('/dashboard_admin', [HelpdeskController::class, 'dashboardAdmin'])
+        ->middleware('auth')
+        ->name('dashboard_admin');
+
+    Route::put('/department/{id}/update-status', [HelpdeskController::class, 'updateStatus'])
+        ->name('department.updateStatus');
+
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
     Route::get('/helpdesk_open', function () {

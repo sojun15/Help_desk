@@ -41,6 +41,10 @@ class UserController extends Controller
         'password' => $request->password
     ])) {
         $request->session()->regenerate();
+        if(($request->email == 'admin@gmail.com') || ($request->email == 'agent@gmail.com'))
+        {
+            return redirect()->route('dashboard_admin');
+        }
         return redirect()->route('dashboard');
     }
 

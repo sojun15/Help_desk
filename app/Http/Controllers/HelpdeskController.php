@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 
 class HelpdeskController extends Controller
 {
-    // protected $table = 'departments';
-
     public function StoreTask(Request $request)
     {
         $validation = $request->validate([
@@ -21,7 +19,7 @@ class HelpdeskController extends Controller
         $data = Department::create([
             'application_department' => $validation['application_department'],
             'supported_task' => $validation['supported_task'],
-            'task_status' => 'panding',
+            'task_status' => 'Panding',
             'user_id' => Auth::user()->user_id,
         ]);
 
@@ -32,9 +30,29 @@ class HelpdeskController extends Controller
         return back()->with('error', 'Something went wrong');
     }
 
+
     public function dashboardPage()
     {
-        $departments = Department::all();
+        $departments = Department::where('user_id',Auth::user()->user_id)->get();
         return view('dashboard', compact('departments'));
+    }
+
+    public function dashboardAdmin()
+    {
+        $departments = Department::all();
+        return view('dashboard_admin', compact('departments'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'task_status' => 'required|string'
+        ]);
+
+        $department = Department::findOrFail($id);
+        $department->task_status = $request->task_status;
+        $department->save();
+
+        return redirect()->back()->with('success', 'Task status updated successfully');
     }
 }
