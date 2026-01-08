@@ -55,4 +55,17 @@ class HelpdeskController extends Controller
 
         return redirect()->back()->with('success', 'Task status updated successfully');
     }
+
+    public function updateComment(Request $request, $id)
+    {
+        $request->validate([
+            'comments' => 'required|string'
+        ]);
+
+        $department = Department::findOrFail($id);
+        $department->comments = $request->comments;
+        $department->save();
+
+        return redirect()->back()->with('success', 'Task status updated successfully');
+    }
 }

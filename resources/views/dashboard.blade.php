@@ -5,8 +5,9 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body>
+<body class="bg-black text-white">
 
+    <h1 class="flex flex-row justify-center text-yellow-400 my-2">Daffodil to daffodil software</h1>
     <section class="flex flex-row justify-between items-center space-y-2">
     <h1 class="font-bold text-2xl">Hello {{ Auth::user()->name }}</h1>
 
@@ -26,10 +27,13 @@
     <h2 class="my-2">Supported Tasks</h2>
         <ol type="i">
             @foreach($departments as $department)
-                <li class="border border-black">
+                <li class="border border-white">
                     <strong>Application Department: {{ $department->application_department }}</strong>
                     <p>Request task: {{ $department->supported_task }}</p>
                     <p>Task Status: <strong class="bg-blue-600 text-white">{{ $department->task_status }}</strong></p>
+                    @if($department->comments)
+                    <p class="text-red-400">Comments: {{$department->comments}}</p>
+                    @endif
                 </li>
             @endforeach
         </ol>

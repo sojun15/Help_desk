@@ -44,6 +44,14 @@
 
                     <button type="submit" class="bg-blue-500 text-white px-3 py-1 ml-2">Update</button>
                 </form>
+
+                <form action="{{ route('department.updateComment', $department->application_id) }}" 
+                    method="POST" class="mt-2">
+                    @csrf
+                    @method('PUT')
+                    <input type="text" placeholder="Comment" name="comments" id="comment" class="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 ml-2">Update</button>
+                </form>
                 </li>
             @endforeach
         </ol>

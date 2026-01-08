@@ -31,6 +31,9 @@ Route::middleware('web')->group(function () {
     Route::put('/department/{id}/update-status', [HelpdeskController::class, 'updateStatus'])
         ->name('department.updateStatus');
 
+    Route::put('/department/{id}/update-comments', [HelpdeskController::class, 'updateComment'])
+        ->name('department.updateComment');
+
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
     Route::get('/helpdesk_open', function () {
