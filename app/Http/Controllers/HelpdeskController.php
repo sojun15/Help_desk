@@ -46,23 +46,12 @@ class HelpdeskController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'task_status' => 'required|string'
+            'task_status' => 'required|string',
+            'comments'    => 'required|string',
         ]);
 
         $department = Department::findOrFail($id);
         $department->task_status = $request->task_status;
-        $department->save();
-
-        return redirect()->back()->with('success', 'Task status updated successfully');
-    }
-
-    public function updateComment(Request $request, $id)
-    {
-        $request->validate([
-            'comments' => 'required|string'
-        ]);
-
-        $department = Department::findOrFail($id);
         $department->comments = $request->comments;
         $department->save();
 
